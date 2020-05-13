@@ -3,6 +3,7 @@ import { View, TextInput, TouchableOpacity, StyleSheet, Text } from 'react-nativ
 import { connect } from 'react-redux';
 import { black, white, blue } from '../utils/colors';
 import { addQuestion } from '../actions';
+import { addQuestionAsync } from '../utils/api';
 
 class AddQuestion extends Component {
     state = {
@@ -13,6 +14,7 @@ class AddQuestion extends Component {
     onSubmit = () => {
         const { dispatch, route, navigation } = this.props;
         const { id } = route.params;
+        addQuestionAsync(id, this.state);
         dispatch(addQuestion(id, this.state));
         navigation.navigate('Details', { id });
     }

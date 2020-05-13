@@ -20,7 +20,7 @@ export default function App() {
         <NavigationContainer>
           <Tabs.Navigator
             screenOptions={({ route }) => ({
-              tabBarIcon: ({ color, size }) => (route.name === 'Decks'
+              tabBarIcon: ({ color, size }) => (route.name === 'Home'
                 ? <MaterialCommunityIcons name="cards" size={size} color={color} />
                 : <MaterialCommunityIcons name="plus-circle" size={size} color={color} />)
             })}

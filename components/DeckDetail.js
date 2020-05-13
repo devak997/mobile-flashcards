@@ -3,10 +3,12 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { black, red, white } from '../utils/colors';
 import { deleteDeck } from '../actions';
+import { deleteDeckAsync } from '../utils/api';
 
 const DeckDetail = ({ name, noOfQuestions, navigation, dispatch }) => {
 
     const handleDelete = () => {
+        deleteDeckAsync(name);
         dispatch(deleteDeck(name));
         navigation.navigate('Decks');
     }
@@ -22,7 +24,9 @@ const DeckDetail = ({ name, noOfQuestions, navigation, dispatch }) => {
                     onPress={() => navigation.navigate('AddQuestion', { id: name })}>
                     <Text style={styles.btnText}>Add Question</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btn}>
+                <TouchableOpacity
+                    style={styles.btn}
+                    onPress={() => navigation.navigate('Quiz', { id: name })}>
                     <Text style={styles.btnText}>Start Quiz</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleDelete}>
@@ -63,7 +67,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (decks, { route }) => {
     if (!decks[route.params.id]) {
-        return
+        return {}
     }
     return {
         name: decks[route.params.id].title,

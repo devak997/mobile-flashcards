@@ -3,12 +3,15 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 import { connect } from 'react-redux';
 import { black, white, blue } from '../utils/colors';
 import { addDeck } from '../actions';
+import { addDeckAsync } from '../utils/api';
 
 class AddDeck extends Component {
     state = { name: '' }
     handleSubmit = () => {
         const { dispatch, navigation } = this.props;
-        dispatch(addDeck(this.state.name));
+        const { name } = this.state;
+        addDeckAsync(name);
+        dispatch(addDeck(name));
         this.setState({ name: '' });
         navigation.navigate('Home');
     }
