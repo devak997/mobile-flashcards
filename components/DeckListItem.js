@@ -12,7 +12,7 @@ const DeckListItem = ({ name, noOfCards }) => {
                 <Text style={{ fontSize: 24, color: white }}>{name}</Text>
                 <View style={styles.cardDetail}>
                     <Text style={{ fontSize: 20, color: white }}>{noOfCards}</Text>
-                    <Text style={{ fontSize: 12, color: white }}>Cards</Text>
+                    <Text style={{ fontSize: 12, color: white }}>{noOfCards > 1 ? "Cards" : "Card"}</Text>
                 </View>
             </View>
         </TouchableOpacity>

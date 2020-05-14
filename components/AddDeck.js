@@ -13,7 +13,7 @@ class AddDeck extends Component {
         addDeckAsync(name);
         dispatch(addDeck(name));
         this.setState({ name: '' });
-        navigation.navigate('Home');
+        navigation.navigate('Details', { id: name });
     }
     render() {
         const { name } = this.state;

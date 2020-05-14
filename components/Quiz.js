@@ -59,11 +59,11 @@ class Quiz extends Component {
                     <Text style={{ fontSize: 28 }}>
                         {questions[currentQuestion].question}
                     </Text>
-                    {showAnswer && <Text style={{ fontSize: 20, textAlign: 'center' }}>
-                        {questions[currentQuestion].answer}
-                    </Text>}
-                    {!showAnswer &&
-                        <TouchableOpacity onPress={() => this.setState({ showAnswer: true })}>
+                    {showAnswer
+                        ? <Text style={{ fontSize: 20, textAlign: 'center' }}>
+                            {questions[currentQuestion].answer}
+                        </Text>
+                        : <TouchableOpacity onPress={() => this.setState({ showAnswer: true })}>
                             <Text style={{ color: red }}>View Answer</Text>
                         </TouchableOpacity>}
                 </View>

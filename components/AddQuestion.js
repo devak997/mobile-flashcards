@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, TouchableOpacity, StyleSheet, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, TextInput, TouchableOpacity, StyleSheet, Text, TouchableWithoutFeedback, Keyboard, ListViewBase } from 'react-native';
 import { connect } from 'react-redux';
 import { black, white, blue } from '../utils/colors';
 import { addQuestion } from '../actions';
@@ -19,6 +19,12 @@ class AddQuestion extends Component {
         navigation.navigate('Details', { id });
     }
 
+    handleChange = (label, value) => {
+        this.setState({
+            [label]: value
+        })
+    }
+
     render() {
         const { question, answer } = this.state;
         return (
@@ -30,12 +36,12 @@ class AddQuestion extends Component {
                             placeholder='Question'
                             value={question}
                             onFocus={() => this.setState({ color: blue })}
-                            onChangeText={text => this.setState({ question: text })} />
+                            onChangeText={text => this.handleChange('question', text)} />
                         <TextInput
                             style={[styles.input]}
                             placeholder='Answer'
                             value={answer}
-                            onChangeText={text => this.setState({ answer: text })} />
+                            onChangeText={text => this.handleChange('answer', text)} />
                     </View>
                     <TouchableOpacity style={styles.btn} onPress={this.onSubmit}>
                         <Text style={styles.btnText}>Submit</Text>
