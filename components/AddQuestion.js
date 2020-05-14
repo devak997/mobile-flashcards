@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { View, TextInput, TouchableOpacity, StyleSheet, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { black, white, blue } from '../utils/colors';
 import { addQuestion } from '../actions';
@@ -22,24 +22,26 @@ class AddQuestion extends Component {
     render() {
         const { question, answer } = this.state;
         return (
-            <View style={styles.addQuestion}>
-                <View style={styles.inputView}>
-                    <TextInput
-                        style={[styles.input]}
-                        placeholder='Question'
-                        value={question}
-                        onFocus={() => this.setState({ color: blue })}
-                        onChangeText={text => this.setState({ question: text })} />
-                    <TextInput
-                        style={[styles.input]}
-                        placeholder='Answer'
-                        value={answer}
-                        onChangeText={text => this.setState({ answer: text })} />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false} >
+                <View style={styles.addQuestion}>
+                    <View style={styles.inputView}>
+                        <TextInput
+                            style={[styles.input]}
+                            placeholder='Question'
+                            value={question}
+                            onFocus={() => this.setState({ color: blue })}
+                            onChangeText={text => this.setState({ question: text })} />
+                        <TextInput
+                            style={[styles.input]}
+                            placeholder='Answer'
+                            value={answer}
+                            onChangeText={text => this.setState({ answer: text })} />
+                    </View>
+                    <TouchableOpacity style={styles.btn} onPress={this.onSubmit}>
+                        <Text style={styles.btnText}>Submit</Text>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.btn} onPress={this.onSubmit}>
-                    <Text style={styles.btnText}>Submit</Text>
-                </TouchableOpacity>
-            </View>
+            </TouchableWithoutFeedback>
         );
     }
 }

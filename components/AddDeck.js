@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { black, white, blue } from '../utils/colors';
 import { addDeck } from '../actions';
@@ -18,16 +18,18 @@ class AddDeck extends Component {
     render() {
         const { name } = this.state;
         return (
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Deck Name"
-                    value={name}
-                    onChangeText={text => this.setState({ name: text })} />
-                <TouchableOpacity style={styles.btn} onPress={this.handleSubmit}>
-                    <Text style={styles.btnText}>Add Deck</Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.container}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Deck Name"
+                        value={name}
+                        onChangeText={text => this.setState({ name: text })} />
+                    <TouchableOpacity style={styles.btn} onPress={this.handleSubmit}>
+                        <Text style={styles.btnText}>Add Deck</Text>
+                    </TouchableOpacity>
+                </View>
+            </TouchableWithoutFeedback>
         );
     }
 }
