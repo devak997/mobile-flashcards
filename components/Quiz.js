@@ -18,6 +18,9 @@ class Quiz extends Component {
             showAnswer: false
         });
     }
+    handleRestart = () => {
+        this.setState({ currentQuestion: 0, score: 0, showAnswer: false });
+    }
     render() {
         const { currentQuestion, score, showAnswer } = this.state;
         const { questions, noOfQuestions, navigation } = this.props;
@@ -36,6 +39,9 @@ class Quiz extends Component {
                     <Text style={{ fontSize: 18 }}>{`Result: ${score}/${noOfQuestions}`}</Text>
                     <TouchableOpacity style={[styles.btn]} onPress={() => navigation.navigate('Decks')}>
                         <Text style={styles.btnText}>Go Home</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.btn]} onPress={this.handleRestart}>
+                        <Text style={styles.btnText}>Restart Quiz</Text>
                     </TouchableOpacity>
                 </View>
             );
