@@ -1,6 +1,9 @@
 # Mobile Flashcards
 
----
+Mobile flashcards is a mobile application that allows the user to create flashcards. You can add new decks, add cards to existing decks and take quizzes on any deck which will display your score in the end.
+
+## Tested on Android Version 10.0
+
 
 ## Project Purpose:
 
