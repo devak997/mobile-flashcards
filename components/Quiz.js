@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { orange, black, red, green, white } from '../utils/colors';
+import { clearNotification, setLocalNotification } from '../utils/helper';
 
 class Quiz extends Component {
     state = { currentQuestion: 0, score: 0, showAnswer: false }
@@ -21,6 +22,10 @@ class Quiz extends Component {
     handleRestart = () => {
         this.setState({ currentQuestion: 0, score: 0, showAnswer: false });
     }
+    scheduleNotification = () => {
+        clearNotification()
+            .then(setLocalNotification)
+    }
     render() {
         const { currentQuestion, score, showAnswer } = this.state;
         const { questions, noOfQuestions, navigation } = this.props;
@@ -33,6 +38,7 @@ class Quiz extends Component {
         }
 
         if (currentQuestion >= noOfQuestions) {
+            this.scheduleNotification();
             return (
                 <View style={[styles.center, { flex: 1 }]}>
                     <Text style={{ fontSize: 18 }}>Quiz Completed!</Text>
